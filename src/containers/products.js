@@ -13,11 +13,9 @@ class Products extends React.Component{
             
         }
     }
-
     componentDidMount(){
         this.props.getProducts();
     }
-    
     render(){
         return(
             <form>
@@ -28,7 +26,6 @@ class Products extends React.Component{
         )
     }
 }
-
 function mapStatetoProps(appState){
     console.log(appState);
    return {products: appState.products}

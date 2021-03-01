@@ -1,32 +1,32 @@
 import React from 'react';
 import { bindActionCreators } from "redux";
-import {registerNewUser} from '../actions/user';
+import {loginUser} from '../actions/user';
 import {connect} from 'react-redux';
 
-class Register extends React.Component{
+class Login extends React.Component{
 
     constructor(){
         super();
 
         this.state={
-            username: '',
-            password:'',
             emailId:'',
-            role:'ROLE_CUSTOMER'
-
+            password:'',
+            role:''
         }
     }
 
               onInputChange= (event) => {
                       var name=event.target.name;
                       var value=event.target.value;
+                      console.log(name+ "\t"+ value);
                        this.setState({[name]:value});
+                       
               }
 
               registerUser = (event) =>{
                   event.preventDefault();
                   console.log('state',this.state);
-                  this.props.registerNewUser(this.state);
+                  this.props.loginUser(this.state);
                   console.log('userlogged in',this.props.isUserLoggedIn);
                   
               }
@@ -34,14 +34,26 @@ class Register extends React.Component{
     render(){
                console.log('render called');
                 if(this.props.isUserLoggedIn){
-                    this.props.history.push('/dashboard');
+                     if(this.state.role == "ROLE_CUSTOMER"){
+                        this.props.history.push('/dashboard');
+                     }
+                     else
+                     {
+                         this.props.history.push('/admin-dashboard');
+                     }
+                    
                 }
         return(
             <form>
 
-                Enter Username: <input onChange={this.onInputChange} className="form-control" type="text" name="username"></input> <br></br>
+Enter EmailId: <input onChange={this.onInputChange} className="form-control" type="text" name="emailId"></input><br></br>
                 Enter Password: <input onChange={this.onInputChange} className="form-control" type="password" name="password"></input> <br></br>
-                Enter EmailId: <input onChange={this.onInputChange} className="form-control" type="text" name="emailId"></input><br></br>
+                Select Role: <select name="role" onChange={this.onInputChange}>
+                     <option>Select your Role</option>
+                      <option value="ROLE_ADMIN">Admin</option>
+                      <option value="ROLE_CUSTOMER">CUSTOMER</option>
+                </select>
+               
                 <button onClick={this.registerUser}>Submit</button>
              
             
@@ -57,6 +69,6 @@ function mapStateToProps(appState){
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({registerNewUser:registerNewUser}, dispatch);
+    return bindActionCreators({loginUser:loginUser}, dispatch);
   }
-export default connect(mapStateToProps,mapDispatchToProps)(Register);
+export default connect(mapStateToProps,mapDispatchToProps)(Login);

@@ -11,13 +11,16 @@ class Header extends React.Component{
 
   <ul className="navbar-nav">
     <li className="nav-item">
-      <a className="nav-link" href="#">login</a>
+      <NavLink className="nav-link" to="/login">login</NavLink>
     </li>
     <li className="nav-item">
       <NavLink className="nav-link" to="/register">register</NavLink>
     </li>
     <li className="nav-item">
       <NavLink className="nav-link" to="/products">Products</NavLink>
+    </li>
+    <li className="nav-item">
+      <NavLink className="nav-link" to="/addProduct">Add Product</NavLink>
     </li>
   </ul>
 </nav>
