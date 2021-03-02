@@ -4,6 +4,7 @@ import ProductsReducer from '../reducers/products';
 
 const rootReducer = combineReducers({
   isUserLoggedIn:UserReducer,
+  isProductAdded:ProductsReducer,
   products:ProductsReducer
 });
 
