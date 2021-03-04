@@ -6,7 +6,7 @@ import {addANewProduct} from '../actions/products';
 function AddProduct(props){
 
       const [product,setProduct]=useState({
-        productId:'',
+        pid:'',
         product_name:'',
         price:'',
         category:'',
@@ -21,6 +21,9 @@ function AddProduct(props){
     const onInputChange= (event) => {
         var name=event.target.name;
         var value=event.target.value;
+          if(name == 'price'){
+              value= parseInt(value);
+          }
         console.log(name+ "\t"+ value);
          setProduct(product => ({
             ...product,
@@ -41,7 +44,7 @@ function AddProduct(props){
       }
     return(
         <div>        
-Enter Product Id: <input onChange={onInputChange} className="form-control" type="text" name="productId"></input> <br></br>
+Enter Product Id: <input onChange={onInputChange} className="form-control" type="text" name="pid"></input> <br></br>
 Enter name of product: <input onChange={onInputChange} className="form-control" type="text" name="product_name"></input> <br></br>
 Enter Product Price: <input onChange={onInputChange} className="form-control" type="text" name="price"></input> <br></br>
 Enter product_image: <input onChange={onInputChange} className="form-control" type="text" name="product_image"></input> <br></br>
